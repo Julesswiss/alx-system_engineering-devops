@@ -1,0 +1,1 @@
+Shell, initalization files, variables and expansions project, ALX SOFTWARE ENGINEERING COURSE. August cohort, Tuesday sepetember 6th project.  Still on probation. Task 0 is about aliases. I am to create  new command using the aliase command
