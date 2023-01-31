@@ -3,14 +3,14 @@ Project done during **Full Stack Software Engineering studies** at **ALX online 
 It aims to learn about how to build a regular expression.
 
 ## Technologies
-* Scripts written in Bash version 5.0.17(1):wq
+* Scripts written in Bash version 5.0.17(1)
 * Tested on Ubuntu 20.04 LTS
 
 ## Files
 
 | Filename | Description |
 | -------- | ----------- |
-| `0-simply_match_holberton.rb` | A regular expression that matches `Holberton` |
+| `0-simply_match_school.rb` | A regular expression that matches `School` |
 | `1-repetition_token_0.rb` | A regular expression that matches `hbttn` |
 | `2-repetition_token_1.rb` | A regular expression that matches `htn` and `hbtn` |
 | `3-repetition_token_2.rb` | A regular expression that matches `hbtn`, where the letter `t` can be replied |
@@ -19,4 +19,3 @@ It aims to learn about how to build a regular expression.
 | `6-phone_number.rb` | A regular expression that match with 10 digit phone number|
 | `7-OMG_WHY_ARE_YOU_SHOUTING.rb` | A regular expression that only matches capital letters |
 | `100-textme.rb` | Filters information of a log file |
-| `101-passed_linkedin_regex_challenge.jpg` | Result of Linkedin Regex Puzzle |
