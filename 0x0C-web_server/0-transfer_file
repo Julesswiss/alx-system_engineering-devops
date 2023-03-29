@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Transfer data from client to server
+
+PATH_TO_FILE=$1
+IP=$2
+USERNAME=$3
+SSH_PRIVATE_KEY=$4
+
+if (($# < 3)); then
+    echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+elif (($# == 3)); then
+	scp -o StrictHostKeyChecking=no "${PATH_TO_FILE}" "${USERNAME}@${IP}:~/"
+else
+	scp -o StrictHostKeyChecking=no -i "${SSH_PRIVATE_KEY}" "${PATH_TO_FILE}" "${USERNAME}@${IP}:~/"
+fi
+

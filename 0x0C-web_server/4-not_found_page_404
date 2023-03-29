@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# set up 404 page in nginx
+
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+service nginx start
+new_string="root /var/www/html;\n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\tinternal;\n\t}"
+string_to_replace="root /var/www/html;"
+sed -i "s|${string_to_replace}|${new_string}|" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+service nginx reload
