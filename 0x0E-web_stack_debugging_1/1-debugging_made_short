@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-# Configures an Nginx server to listen on port 80.
 
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx start
-kill "$(pgrep 'nginx' | head -1)"
+# Check if socat is installed
+if ! command -v socat &> /dev/null; then
+    echo "socat not found. Installing it..."
+    apt-get -y install socat > /dev/null 2>&1
+fi
+
+# Use socat to forward traffic from port 80 to 8080
+nohup socat TCP-LISTEN:80,fork TCP:localhost:8080 > /dev/null 2>&1 &
