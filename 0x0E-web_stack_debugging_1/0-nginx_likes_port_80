@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Remove the default config file
+rm /etc/nginx/sites-enabled/default
+
+# Create a symbolic link to the available config file
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# Restart the nginx service
+service nginx restart
