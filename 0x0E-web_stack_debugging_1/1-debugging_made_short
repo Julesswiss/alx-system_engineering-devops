@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
-
-# Check if socat is installed
-if ! command -v socat &> /dev/null; then
-    echo "socat not found. Installing it..."
-    apt-get -y install socat > /dev/null 2>&1
-fi
-
-# Use socat to forward traffic from port 80 to 8080
-nohup socat TCP-LISTEN:80,fork TCP:localhost:8080 > /dev/null 2>&1 &
+# listening on port 80 with=out restarting nginx
+apt-get -y install socat | tee /dev/null > /dev/null 2>&1
+sudo socat TCP-LISTEN:80,fork TCP:localhost:8080 > /dev/null 2>&1 &

@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-
-# Set the new port to 80
-NGINX_CONF="/etc/nginx/sites-enabled/default"
-NEW_PORT="80"
-sed -i "s/listen [0-9]\+ default_server;/listen ${NEW_PORT} default_server;/g" $NGINX_CONF
-
-# Restart the nginx service
-systemctl restart nginx
+# a change while listening port to 80
+sed -i 's/listen 8080 default_server;/listen 80 default_server;/g' /etc/nginx/sites-enabled/default
+pkill nginx
+service nginx restart
