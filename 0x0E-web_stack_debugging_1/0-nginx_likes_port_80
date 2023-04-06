@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# a change while listening port to 80
+# a script to change while listening port to 80
 sed -i 's/listen 8080 default_server;/listen 80 default_server;/g' /etc/nginx/sites-enabled/default
-pkill nginx
+pkill -9 nginx
 service nginx restart
