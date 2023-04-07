@@ -1,0 +1,60 @@
+#!/bin/bash
+
+function get_record_type {
+    # Extracts the record type from the dig output
+    echo "$1" | awk '/IN\s+A/ {print "A"}; /IN\s+CNAME/ {print "CNAME"}'
+}
+
+function get_destination {
+    # Extracts the destination IP address from the dig output
+    echo "$1" | awk '/IN\s+A/ {print $5}; /IN\s+CNAME/ {print $NF}'
+}
+
+function audit_subdomain {
+    # Prints information about the given subdomain
+    local subdomain=$1
+    local domain=$2
+
+    # Get the record type and destination IP address using dig command
+    dig_output=$(dig +short $subdomain.$domain)
+    record_type=$(get_record_type "$dig_output")
+    destination=$(get_destination "$dig_output")
+
+    # Print the information in the required format
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+}
+
+function audit_domain {
+    # Prints information about the subdomains of the given domain
+    local domain=$1
+
+    # Audit the www subdomain
+    audit_subdomain www $domain
+
+    # Audit the lb-01 subdomain
+    audit_subdomain lb-01 $domain
+
+    # Audit the web-01 subdomain
+    audit_subdomain web-01 $domain
+
+    # Audit the web-02 subdomain
+    audit_subdomain web-02 $domain
+}
+
+# Check the number of arguments
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 domain [subdomain]"
+    exit 1
+fi
+
+# Get the domain and subdomain arguments
+domain=$1
+subdomain=${2:-""}
+
+# Audit the subdomain if provided, or all subdomains otherwise
+if [ -n "$subdomain" ]; then
+    audit_subdomain $subdomain $domain
+else
+    audit_domain $domain
+fi
+
